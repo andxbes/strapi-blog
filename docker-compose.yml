@@ -2,7 +2,7 @@ version: "3"
 services:
   strapi:
     container_name: strapi
-    build: .
+    build: ./strapi/
     image: strapi:latest
     restart: unless-stopped
     env_file: .env
@@ -18,12 +18,12 @@ services:
       APP_KEYS: ${APP_KEYS}
       NODE_ENV: ${NODE_ENV}
     volumes:
-      - ./config:/opt/app/config
-      - ./src:/opt/app/src
-      - ./package.json:/opt/package.json
-      - ./yarn.lock:/opt/yarn.lock
+      - ./strapi/config:/opt/app/config
+      - ./strapi/src:/opt/app/src
+      - ./strapi/package.json:/opt/package.json
+      - ./strapi/yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
-      - ./public/uploads:/opt/app/public/uploads
+      - ./strapi/public/uploads:/opt/app/public/uploads
     ports:
       - "80:1337"
     networks:
@@ -62,6 +62,21 @@ services:
       - "88:8080"
     networks:
       - strapi
+    depends_on:
+      - strapiDB
+
+  # nginx:
+  #   image: "bitnami/nginx:latest"
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - strapi
+  #   networks:
+  #     - strapi
+  #   ports:
+  #     - "80:80"
+  #     # - '443:443'
+  #   volumes:
+  #     - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
 
 volumes:
   mariadb_data:
