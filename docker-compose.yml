@@ -24,8 +24,8 @@ services:
       - ./strapi/yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
       - ./strapi/public/uploads:/opt/app/public/uploads
-    # ports:
-    #   - "90:1337"
+    ports:
+      - "90:1337"
     networks:
       - strapi
     depends_on:
@@ -77,6 +77,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
+      # - ./nginx/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:cached
       - ./frontend/:/var/www/html/
 
 volumes:
