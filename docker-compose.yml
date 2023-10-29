@@ -24,8 +24,8 @@ services:
       - ./strapi/yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
       - ./strapi/public/uploads:/opt/app/public/uploads
-    ports:
-      - "80:1337"
+    # ports:
+    #   - "90:1337"
     networks:
       - strapi
     depends_on:
@@ -65,18 +65,19 @@ services:
     depends_on:
       - strapiDB
 
-  # nginx:
-  #   image: "bitnami/nginx:latest"
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - strapi
-  #   networks:
-  #     - strapi
-  #   ports:
-  #     - "80:80"
-  #     # - '443:443'
-  #   volumes:
-  #     - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
+  nginx:
+    image: "bitnami/nginx:latest"
+    restart: unless-stopped
+    depends_on:
+      - strapi
+    networks:
+      - strapi
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
+      - ./frontend/:/var/www/html/
 
 volumes:
   mariadb_data:
