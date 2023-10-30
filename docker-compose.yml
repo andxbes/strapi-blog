@@ -80,7 +80,7 @@ services:
     volumes:
       - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
       # - ./nginx/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:cached
-      - ./frontend/:/var/www/html/
+      - ./frontend/:/srv/www/html/
 
 volumes:
   mariadb_data:
