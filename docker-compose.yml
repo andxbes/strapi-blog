@@ -72,6 +72,8 @@ services:
       - strapi
     networks:
       - strapi
+    links:
+      - strapi
     ports:
       - "80:80"
       - "443:443"
