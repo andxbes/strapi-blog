@@ -77,7 +77,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf:cached
-      - ./frontend/:/srv/www/html/
+      - ./frontend/build/:/srv/www/html/
 
 volumes:
   mariadb_data:
