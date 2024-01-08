@@ -2,7 +2,7 @@ git submodule update --init --recursive
 
 docker compose up 
 
-cd .frontend
+cd ./frontend
 
 npm install 
 
